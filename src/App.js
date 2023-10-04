@@ -33,6 +33,9 @@ function App() {
 
       const res = response.data
       console.log("parent" , res);
+      var array = Object.keys(res)
+      console.log(array)
+      console.log(array.length)
       setWeatherData(res)
     }
 
@@ -47,10 +50,10 @@ function App() {
     }
     
   }
-  if(isLoading)
-  {
-    console.log('loading .........')
-  }
+  // if(isLoading)
+  // {
+  //   console.log('loading .........')
+  // }
 
   useEffect(() =>{
     fetchData(url);
@@ -59,17 +62,29 @@ function App() {
     }
   }
   
-  ,[]);
+  ,[cityName]);
   return (
+    <>
 
     <div className="App">
 
-      <Search cityPropFunc = {changeCity}/>
-      <WeatherItem data = {weatherData}/>
-      <DailyWeather data = {weatherData} />
+      <Search callback = {changeCity}/>
 
-</div>
+      {isLoading ? (console.log('loading .........')):(
+        <>
+        {weatherData && <WeatherItem data = {weatherData}/>}
+        <DailyWeather data = {weatherData} />
+
+        </>
+      )}
+       
+
+    </div>
+</>
   );
 }
 
 export default App;
+
+
+
