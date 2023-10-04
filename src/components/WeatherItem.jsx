@@ -1,16 +1,23 @@
 import React from 'react';
 import mc from "../img/weather-icons/mostlycloudy.svg";
 
-const WeatherItem = () => {
+const WeatherItem = (props) => {
 
-  console.log("success")
+  const convert = (temp) =>
+  {
+    return parseInt(temp - 273.15);
+  }
+
+  
+
+
   return (
     <div className="wrapper-2">
       <div id="image">
 <img src={mc} alt="clear" />
 </div>
 <div id="weather">
-  <h1>weather</h1>
+  <h1>{convert(props.data.main.temp)}℃</h1>
 </div>
 <div id="temp">
   <h1>Temperature 10° to 11℃</h1>

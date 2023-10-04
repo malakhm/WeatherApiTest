@@ -16,7 +16,7 @@ function App() {
   const [cityName, setCity] = useState("london");
   const [isLoading, setLoading] = useState(false);
   const [weatherData, setWeatherData] = useState()
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=65625cce43b3bc77dab00b24349bf814`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=284466794ddf0e728f1f4d14c5c26591`;
 
 
   const changeCity = (cityInput) => 
@@ -29,9 +29,11 @@ function App() {
     setLoading(true);
     try
     {
-      const response = await fetch(url);
-      const finalResponse = await response.json();
-      console.log(finalResponse.data);
+      const response = await axios(url);
+
+      const res = response.data
+      console.log("parent" , res);
+      setWeatherData(res)
     }
 
     catch(err)
@@ -51,8 +53,13 @@ function App() {
   }
 
   useEffect(() =>{
-    fetchData(url)
-  },[]);
+    fetchData(url);
+    return () =>{
+      console.log("cleaning...");
+    }
+  }
+  
+  ,[]);
   return (
 
     <div className="App">
